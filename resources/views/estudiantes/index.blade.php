@@ -37,7 +37,7 @@
                                             <td>{{ $estudiante->nombre }} {{ $estudiante->apellidos }}</td>
                                             <td>{{ $estudiante->email }}</td>
                                             <td>{{ $estudiante->telefono }}</td>
-                                            <td>{{ $estudiante->edad }}</td>
+                                            <td>{{ $estudiante->age }} años</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <div class="p-2">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Estudiante;
+use App\Grupo;
 use App\Http\Requests\EstudianteRequest;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class EstudianteController extends Controller
 
     public function create()
     {
-        return view('estudiantes.create');
+        $grupos = Grupo::all();
+        return view('estudiantes.create', compact('grupos'));
     }
 
     public function store(EstudianteRequest $request)
@@ -32,6 +34,11 @@ class EstudianteController extends Controller
         $estudiante->email = $request->correo_electronico;
         $estudiante->telefono = $request->teléfono;
         $estudiante->edad = $request->fecha_nacimiento;
+        $estudiante->grupo_id = $request->semestre;
+        $estudiante->grupo_id = $request->grupo;
+        $estudiante->grupo_id = $request->turno;
+
+
 
         // dd($estudiante);
         if($estudiante->save()){

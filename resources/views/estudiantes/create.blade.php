@@ -64,10 +64,63 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-md-6 mt-2">
+                                    <div class="form-group">
+                                        <label for="semestre">Semestre </label>
+                                        <select name="semestre" class="form-control @error('semestre') is-invalid @enderror">
+                                            <option value="" selected>-- Selecciona un semestre --</option>
+                                            @foreach ($grupos as $grupo)
+                                                <option value="{{ $grupo->id }}" {{ old('semestre') == $grupo->id ? 'selected' : '' }}>
+                                                {{ $grupo->semestre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('semestre')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>                                  
+                                </div>
+
+                                <div class="col-md-6 mt-2">
+                                    <div class="form-group">
+                                        <label for="grupo">Grupo </label>
+                                        <select name="grupo" class="form-control @error('grupo') is-invalid @enderror">
+                                            <option value="" selected>-- Selecciona un grupo --</option>
+                                            @foreach ($grupos as $grupo)
+                                                <option value="{{ $grupo->id }}"
+                                                    {{ old('grupo') == $grupo->id ? 'selected' : '' }}>
+                                                    {{ $grupo->grupo }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('grupo')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>                                  
+                                </div>
+
+                                <div class="col-md-6 mt-2">
+                                    <div class="form-group">
+                                        <label for="turno">Turno</label>
+                                        <select name="turno" class="form-control @error('turno') is-invalid @enderror">
+                                            <option value="" selected>-- Selecciona un turno --</option>
+                                            @foreach ($grupos as $grupo)
+                                                <option value="{{ $grupo->id }}"
+                                                    {{ old('turno') == $grupo->id ? 'selected' : '' }}>
+                                                    {{ $grupo->turno }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('turno')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>                                  
+                                </div>
+
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i>
+                                    <i class="fas fa-save"></i>
                                     Guardar
                                 </button>
                             </div>
