@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     @toastr_css
+
+    <style>
+       .bg-card{
+        background: #3f4570;
+        color: white;
+        font-size: 17px;        
+        }
+    </style>
 </head>
 
 <body>
@@ -49,7 +57,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Grupos') }}</a>
+                                <a class="nav-link" href="{{ route('grupos.index') }}">{{ __('Grupos') }}</a>
                             </li>
                         @endif
                     </ul>

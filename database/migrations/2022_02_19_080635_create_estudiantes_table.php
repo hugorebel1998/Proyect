@@ -20,6 +20,8 @@ class CreateEstudiantesTable extends Migration
             $table->string('email')->unique();
             $table->string('telefono', 10);
             $table->date('edad');
+            $table->unsignedBigInteger('grupo_id');
+            $table->foreign('grupo_id')->references('id')->on('grupos');
             $table->softDeletes();
             $table->timestamps();
         });

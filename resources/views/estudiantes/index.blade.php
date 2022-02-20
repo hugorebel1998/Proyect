@@ -4,8 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Gestion de estudiantes</div>
+                    <div class="card-header bg-card">
+                        <div class="card-title"><i class="fas fa-users"></i> Gestion de estudiantes</div>
                     </div>
                     <div class="card-body">
                         <div class="d-flex flex-row-reverse mb-3">
@@ -19,7 +19,7 @@
 
                         <div class="table-responsive">
                             <table class="table">
-                                <thead>
+                                <thead class="text-white" style="background: #3f4570">
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nombre</th>
