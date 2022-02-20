@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header text-white"  style="background: #3f4570">
                         <div class="card-title"><i class="fas fa-user"></i> Editar informacion de <b> {{ $estudiante->nombre }} </b></div>
                     </div>
                     <div class="card-body">
@@ -69,9 +69,9 @@
 
                             </div>
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save"></i>
-                                    Guardar
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-pen-square"></i>
+                                    Actualizar 
                                 </button>
                             </div>
                         </form>

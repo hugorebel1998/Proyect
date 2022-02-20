@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Estudiante;
 use App\Grupo;
 use App\Http\Requests\GrupoRequest;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class GrupoController extends Controller
     }
     public function create()
     {
-        return view('grupos.create');
+        $estudiantes = Estudiante::all();
+        return view('grupos.create', compact('estudiantes'));
     }
 
     public function store(GrupoRequest $request)
@@ -30,11 +32,12 @@ class GrupoController extends Controller
         $grupo->semestre = $request->semestre;
         $grupo->grupo = $request->grupo;
         $grupo->turno = $request->turno;
+        $grupo->estudiante_id = $request->estudiante;
 
-        // dd($grupo);
+        
 
         if ($grupo->save()) {
-            toastr()->success('Nuevo grupo creado');
+            toastr()->success('Nuevo grupo creado con éxito');
             return redirect()->to(route('grupos.index'));
         } else {
             toastr()->error('Algo salio mal');
@@ -70,12 +73,20 @@ class GrupoController extends Controller
     public function delete($id)
     {
         $grupo = Grupo::findOrFail($id);
-        if($grupo->delete()){
+        if ($grupo->delete()) {
             toastr()->success('Eliminaste este registro');
             return redirect()->back();
-        }else{
+        } else {
             toastr()->error('Algo salio mal');
             return redirect()->back();
         }
     }
+
+    // public function estudiantesGrupo(Request $request,$id)
+    // {
+    //     $alumno = Estudiante::find($id);
+    //     $estudiantes = Grupo::where('estudiante_id', $alumno)->get();
+    //     return view('grupos.estudiantes', compact('estudiantes'));
+
+    // }
 }

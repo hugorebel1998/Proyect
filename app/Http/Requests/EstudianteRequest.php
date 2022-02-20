@@ -29,9 +29,6 @@ class EstudianteRequest extends FormRequest
             'correo_electronico' => 'required|email|unique:estudiantes,email',
             'teléfono' => 'min:10|max:10|required',
             'fecha_nacimiento' => 'required',
-            'semestre' => 'required',
-            'grupo' => 'required',
-            'turno' => 'required'
 
         ];
     }

@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header text-white"  style="background: #3f4570">
                         <div class="card-title"><i class="fas fa-ad"></i> Crear grupo</div>
                     </div>
                     <div class="card-body">
@@ -49,11 +49,28 @@
                                     </div>
                                 </div>
 
-                               
+                                <div class="col-md-12 mt-2">
+                                    <div class="form-group">
+                                        <label for="estudiante">Estudiante </label>
+                                        <select name="estudiante" class="form-control @error('estudiante') is-invalid @enderror">
+                                            <option value="" selected>-- Selecciona un estudiante --</option>
+                                            @foreach ($estudiantes as $estudiante)
+                                                <option value="{{ $estudiante->id }}" {{ old('estudiante') == $estudiante->id ? 'selected' : '' }}>
+                                                {{ $estudiante->nombre }} {{ $estudiante->apellidos }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('estudiante')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>                                  
+                                </div>
+
+
 
                             </div>
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save"></i>
                                     Guardar grupo
                                 </button>

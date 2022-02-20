@@ -38,3 +38,4 @@ Route::post('/grupo/store', 'GrupoController@store')->name('grupo.store');
 Route::get('/grupo/edit/{grupo}', 'GrupoController@edit')->name('grupo.edit');
 Route::put('/grupo/update', 'GrupoController@update')->name('grupo.update');
 Route::delete('/grupos/delete/{grupo}', 'GrupoController@delete')->name('grupo.delete');
+// Route::get('/grupos/estudiantes/{estudiante}', 'GrupoController@estudiantesGrupo')->name('grupo.estudiantes');

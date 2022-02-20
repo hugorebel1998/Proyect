@@ -26,7 +26,8 @@ class GrupoRequest extends FormRequest
         return [
             'semestre' => 'required',
             'grupo' => 'required',
-            'turno' => 'required|in:Matutino,Vespertino'
+            'turno' => 'required|in:Matutino,Vespertino',
+            'estudiante' => 'required|unique:grupos,estudiante_id'
         ];
     }
 }

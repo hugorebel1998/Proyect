@@ -22,8 +22,8 @@ class EstudianteController extends Controller
 
     public function create()
     {
-        $grupos = Grupo::all();
-        return view('estudiantes.create', compact('grupos'));
+        
+        return view('estudiantes.create');
     }
 
     public function store(EstudianteRequest $request)
@@ -34,12 +34,16 @@ class EstudianteController extends Controller
         $estudiante->email = $request->correo_electronico;
         $estudiante->telefono = $request->teléfono;
         $estudiante->edad = $request->fecha_nacimiento;
-        $estudiante->grupo_id = $request->semestre;
-        $estudiante->grupo_id = $request->grupo;
-        $estudiante->grupo_id = $request->turno;
+        // $estudiante->grupo_id = null;
+        
+        
+        $fechaNow = date('Y-m-d');
+        if($request->fecha_nacimiento === $fechaNow){
+            toastr()->warning('Edad no admitida');
+            return redirect()->back();
+        }
 
-
-
+        
         // dd($estudiante);
         if($estudiante->save()){
             toastr()->success('Nuevo estudiante creado');
@@ -76,8 +80,14 @@ class EstudianteController extends Controller
         $estudiante->telefono = $request->teléfono;
         $estudiante->edad = $request->fecha_nacimiento; 
 
+        
+        $fechaNow = date('Y-m-d');
+        if($request->fecha_nacimiento === $fechaNow){
+            toastr()->warning('Edad no admitida');
+            return redirect()->back();
+        }
         // dd($estudiante);
-
+        
         if($estudiante->update()){
             toastr()->info('Estudiante actualizado');
             return redirect()->to(route('estudiantes.index'));

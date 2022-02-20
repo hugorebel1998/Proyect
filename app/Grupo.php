@@ -14,4 +14,6 @@ class Grupo extends Model
     {
         return $this->hasMany(Estudiante::class);
     }
+
+    
 }
