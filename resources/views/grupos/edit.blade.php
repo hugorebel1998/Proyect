@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-header text-white"  style="background: #3f4570">
                         <div class="card-title"><i class="fas fa-ad"></i> Editar grupo</div>
                     </div>

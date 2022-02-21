@@ -3,12 +3,17 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-11">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-header bg-card">
                         <div class="card-title"><i class="fas fa-users"></i> Gestion de estudiantes</div>
                     </div>
                     <div class="card-body">
-                        <div class="d-flex flex-row-reverse mb-3">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="p-2">
+                                <input class="form-control col-md-12 light-table-filter " data-table="order-table" type="text" placeholder="Buscar..">
+
+
+                            </div>
                             <div class="p-2">
                                 <a href="{{ route('estudiante.create') }}" class="btn btn-primary">
                                     <i class="fas fa-plus"></i>
@@ -18,7 +23,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table order-table">
                                 <thead class="text-white" style="background: #3f4570">
                                     <tr>
                                         <th scope="col">#</th>
@@ -51,12 +56,19 @@
                                                         </a>
                                                     </div>
                                                     <div class="p-2">
+                                                         <a href="{{ route('estudiante.show', [$estudiante->id])}}" title="Ver"
+                                                            class="btn btn-success">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="p-2">
 
                                                         <form action="{{ route('estudiante.delete', [$estudiante->id]) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro?')" title="Eliminar">
+                                                            <button type="submit" class="btn btn-danger"
+                                                                onclick="return confirm('¿Estas seguro?')" title="Eliminar">
                                                                 <i class="fas fa-trash-alt"></i></button>
                                                         </form>
                                                     </div>
@@ -73,6 +85,6 @@
             </div>
         </div>
     </div>
-
+    @include('components.buscador')
 
 @endsection

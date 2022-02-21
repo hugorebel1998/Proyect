@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-11">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-header bg-card">
                         <div class="card-title"><i class="fas fa-layer-group"></i> Gestion de grupos</div>
                     </div>

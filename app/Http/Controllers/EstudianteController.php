@@ -63,6 +63,16 @@ class EstudianteController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $estudiante = Estudiante::findOrFail($id);
+        $grupo = Grupo::findOrFail($estudiante->grupo_id);
+        // dd($grupo);
+        return view('estudiantes.show', compact('estudiante', 'grupo'));
+
+
+    }
+
     public function edit($id)
     {
         $grupos = Grupo::all();
