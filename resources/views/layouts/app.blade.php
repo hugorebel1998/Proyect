@@ -53,11 +53,17 @@
                         @if (Auth::check())
                             <li class="nav-item">
                                 <a class="nav-link"
-                                    href="{{ route('estudiantes.index') }}">{{ __('Estudiantes') }}</a>
+                                    href="{{ route('estudiantes.index') }}">
+                                <i class="fas fa-users"></i>
+                                    {{ __('Estudiantes') }}
+                                </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('grupos.index') }}">{{ __('Grupos') }}</a>
+                                <a class="nav-link" href="{{ route('grupos.index') }}">
+                                    <i class="fas fa-layer-group"></i>
+                                    {{ __('Grupos') }}
+                                </a>
                             </li>
                         @endif
                     </ul>

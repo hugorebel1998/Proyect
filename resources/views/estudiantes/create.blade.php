@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header text-white"  style="background: #3f4570">
+                    <div class="card-header text-white" style="background: #3f4570">
                         <div class="card-title"><i class="fas fa-user"></i> Crear estudiante</div>
                     </div>
                     <div class="card-body">
@@ -38,6 +38,8 @@
                                     <input type="email" name="correo_electronico"
                                         class="form-control @error('correo_electronico') is-invalid @enderror"
                                         value="{{ old('correo_electronico') }}">
+                                    <small id="emailHelp" class="form-text text-muted">El correo electrónico debe ser
+                                        unico.</small>
                                     @error('correo_electronico')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -63,6 +65,26 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-6 mt-2">
+                                    <div class="form-group">
+                                        <label for="grupo">Semestre</label>
+                                        <select name="grupo" class="form-control @error('grupo') is-invalid @enderror">
+                                            <option value="" selected>-- Seleciona una opcion --</option>
+                                            @foreach ($grupos as $grupo)
+                                                <option value="{{ $grupo->id }}"
+                                                    {{ old('grupo') == $grupo->id ? 'selected' : '' }}>
+                                                    {{ $grupo->semestre }} - {{ $grupo->grupo }} - {{ $grupo->turno }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <small id="emailHelp" class="form-text text-muted">Semestre, grupo y turno.</small>
+                                        @error('grupo')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-success">

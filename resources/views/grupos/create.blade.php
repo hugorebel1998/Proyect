@@ -49,23 +49,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 mt-2">
-                                    <div class="form-group">
-                                        <label for="estudiante">Estudiante </label>
-                                        <select name="estudiante" class="form-control @error('estudiante') is-invalid @enderror">
-                                            <option value="" selected>-- Selecciona un estudiante --</option>
-                                            @foreach ($estudiantes as $estudiante)
-                                                <option value="{{ $estudiante->id }}" {{ old('estudiante') == $estudiante->id ? 'selected' : '' }}>
-                                                {{ $estudiante->nombre }} {{ $estudiante->apellidos }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('estudiante')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>                                  
-                                </div>
-
+                            
 
 
                             </div>

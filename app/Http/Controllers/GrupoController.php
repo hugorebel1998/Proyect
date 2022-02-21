@@ -32,16 +32,25 @@ class GrupoController extends Controller
         $grupo->semestre = $request->semestre;
         $grupo->grupo = $request->grupo;
         $grupo->turno = $request->turno;
-        $grupo->estudiante_id = $request->estudiante;
 
-        
 
-        if ($grupo->save()) {
-            toastr()->success('Nuevo grupo creado con éxito');
-            return redirect()->to(route('grupos.index'));
-        } else {
-            toastr()->error('Algo salio mal');
+        $validateGrupo = Grupo::where('semestre', $request->semestre)
+            ->where('grupo', $request->grupo)
+            ->where('turno', $request->turno)
+            ->count();
+
+        if ($validateGrupo > 0) {
+            toastr()->warning('Este grupo ya esta registrador');
             return redirect()->back();
+        } else {
+
+            if ($grupo->save()) {
+                toastr()->success('Nuevo grupo creado con éxito');
+                return redirect()->to(route('grupos.index'));
+            } else {
+                toastr()->error('Algo salio mal');
+                return redirect()->back();
+            }
         }
     }
 
@@ -61,12 +70,23 @@ class GrupoController extends Controller
 
         // dd($grupo);
 
-        if ($grupo->update()) {
-            toastr()->info('Grupo actualizado con éxito');
-            return redirect()->to(route('grupos.index'));
-        } else {
-            toastr()->error('Algo salio mal');
+        $validateGrupo = Grupo::where('semestre', $request->semestre)
+            ->where('grupo', $request->grupo)
+            ->where('turno', $request->turno)
+            ->count();
+
+        if ($validateGrupo > 0) {
+            toastr()->warning('Este grupo ya esta registrador');
             return redirect()->back();
+        } else {
+
+            if ($grupo->save()) {
+                toastr()->info('Grupo actualizafo con éxito.');
+                return redirect()->to(route('grupos.index'));
+            } else {
+                toastr()->error('Algo salio mal.');
+                return redirect()->back();
+            }
         }
     }
 
@@ -82,11 +102,12 @@ class GrupoController extends Controller
         }
     }
 
-    // public function estudiantesGrupo(Request $request,$id)
-    // {
-    //     $alumno = Estudiante::find($id);
-    //     $estudiantes = Grupo::where('estudiante_id', $alumno)->get();
-    //     return view('grupos.estudiantes', compact('estudiantes'));
+    public function estudiantesGrupo(Request $request,$id)
+    {
+        $grupo = Grupo::find($id);
+        // dd($grupo);
+        $estudiantes = Estudiante::where('grupo_id', $id)->get();
+        return view('grupos.estudiantes', compact('estudiantes', 'grupo'));
 
-    // }
+    }
 }

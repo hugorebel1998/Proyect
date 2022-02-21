@@ -47,7 +47,7 @@
                                                     </div>
                                                     <div class="pl-2">
 
-                                                        <a href=""
+                                                        <a href="{{ route('grupo.estudiantes', [$grupo->id]) }}"
                                                             class="btn btn-secondary" title="Ver estudiantes">
                                                             <i class="fad fa-eye"></i>
                                                         </a>

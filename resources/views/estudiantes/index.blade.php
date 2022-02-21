@@ -26,6 +26,7 @@
                                         <th scope="col">Correo electrónico</th>
                                         <th scope="col">Teléfono</th>
                                         <th scope="col">Edad</th>
+                                        <th scope="col">Grupo</th>
                                         <th scope="col"></th>
 
                                     </tr>
@@ -38,6 +39,8 @@
                                             <td>{{ $estudiante->email }}</td>
                                             <td>{{ $estudiante->telefono }}</td>
                                             <td>{{ $estudiante->age }} años</td>
+                                            <td>{{ $estudiante->grupo->grupo }}</td>
+
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <div class="p-2">

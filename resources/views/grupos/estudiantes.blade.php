@@ -5,7 +5,8 @@
             <div class="col-md-11">
                 <div class="card">
                     <div class="card-header bg-card">
-                        <div class="card-title"><i class="fas fa-users"></i> Gestion de estudiantes</div>
+                        <div class="card-title"><i class="fas fa-users"></i> Gestion de estudiantes 
+                            <b>{{ $grupo->semestre }} / {{ $grupo->grupo }} / {{ $grupo->turno }}</b>  </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -26,7 +27,7 @@
                                             <td>{{ $estudiante->nombre }} {{ $estudiante->apellidos }}</td>
                                             <td>{{ $estudiante->email }}</td>
                                             <td>{{ $estudiante->telefono }}</td>
-                                            {{-- <td>{{ $estudiante->age }} años</td> --}}
+                                            <td>{{ $estudiante->age }} años</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -6,6 +6,7 @@ use App\Estudiante;
 use App\Grupo;
 use App\Http\Requests\EstudianteRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EstudianteController extends Controller
 {
@@ -22,43 +23,51 @@ class EstudianteController extends Controller
 
     public function create()
     {
-        
-        return view('estudiantes.create');
+        $grupos = Grupo::all();
+        return view('estudiantes.create', compact('grupos'));
     }
 
     public function store(EstudianteRequest $request)
     {
         $estudiante = new Estudiante();
-        $estudiante->nombre = $request->nombre;
-        $estudiante->apellidos = $request->apellidos;
-        $estudiante->email = $request->correo_electronico;
+        $estudiante->nombre = Str::title($request->nombre);
+        $estudiante->apellidos = Str::title($request->apellidos);
+        $estudiante->email = Str::lower($request->correo_electronico);
         $estudiante->telefono = $request->teléfono;
         $estudiante->edad = $request->fecha_nacimiento;
-        // $estudiante->grupo_id = null;
+        $estudiante->grupo_id = $request->grupo;
         
-        
+        // dd($estudiante);
+
         $fechaNow = date('Y-m-d');
-        if($request->fecha_nacimiento === $fechaNow){
+        if ($request->fecha_nacimiento === $fechaNow) {
             toastr()->warning('Edad no admitida');
             return redirect()->back();
         }
 
-        
-        // dd($estudiante);
-        if($estudiante->save()){
-            toastr()->success('Nuevo estudiante creado');
-            return redirect()->to(route('estudiantes.index'));
-        }else{
-            toastr()->error('Algo salio mal');
+        $validateAlumno = Estudiante::where('nombre', $request->nombre)
+            ->where('apellidos', $request->apellidos)
+            ->count();
+        if ($validateAlumno > 0) {
+            toastr()->warning('Estudiante ya registrado');
             return redirect()->back();
+        } else {
+            //  dd($estudiante);
+            if ($estudiante->save()) {
+                toastr()->success('Nuevo estudiante creado');
+                return redirect()->to(route('estudiantes.index'));
+            } else {
+                toastr()->error('Algo salio mal');
+                return redirect()->back();
+            }
         }
     }
 
     public function edit($id)
     {
+        $grupos = Grupo::all();
         $estudiante = Estudiante::findOrFail($id);
-        return view('estudiantes.edit', compact('estudiante'));
-
+        return view('estudiantes.edit', compact('estudiante', 'grupos'));
     }
 
     public function update(Request $request)
@@ -69,32 +78,35 @@ class EstudianteController extends Controller
         $request->validate([
             'nombre' => 'required|min:3|max:30',
             'apellidos' => 'required|min:4|max:45',
-            'correo_electronico' => 'required|email|unique:estudiantes,email,'. $estudiante->id,
+            'correo_electronico' => 'required|email|unique:estudiantes,email,' . $estudiante->id,
             'teléfono' => 'min:10|max:10|required',
             'fecha_nacimiento' => 'required'
         ]);
 
-        $estudiante->nombre = $request->nombre;
-        $estudiante->apellidos = $request->apellidos;
-        $estudiante->email = $request->correo_electronico;
+        $estudiante->nombre = Str::title($request->nombre);
+        $estudiante->apellidos = Str::title($request->apellidos);
+        $estudiante->email = Str::lower($request->correo_electronico);
         $estudiante->telefono = $request->teléfono;
-        $estudiante->edad = $request->fecha_nacimiento; 
+        $estudiante->edad = $request->fecha_nacimiento;
+        $estudiante->grupo_id = $request->grupo;
 
-        
+
         $fechaNow = date('Y-m-d');
-        if($request->fecha_nacimiento === $fechaNow){
+        if ($request->fecha_nacimiento === $fechaNow) {
             toastr()->warning('Edad no admitida');
             return redirect()->back();
         }
         // dd($estudiante);
-        
-        if($estudiante->update()){
-            toastr()->info('Estudiante actualizado');
-            return redirect()->to(route('estudiantes.index'));
-        }else{
-            toastr()->error('Algo salio mal');
-            return redirect()->back();
-        }
+
+
+            if ($estudiante->update()) {
+                toastr()->info('Estudiante actualizado');
+                return redirect()->to(route('estudiantes.index'));
+            } else {
+                toastr()->error('Algo salio mal');
+                return redirect()->back();
+            }
+    
     }
 
     public function delete($id)
@@ -102,7 +114,5 @@ class EstudianteController extends Controller
         $estudiante = Estudiante::findOrFail($id);
         $estudiante->delete();
         return back();
-
-
     }
 }
